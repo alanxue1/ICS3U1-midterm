@@ -12,11 +12,18 @@ public class MidtermProject{
 		String strProtagonist;
 		int intLuck;
 		double dblDifficulty;
+		int intHealth = 100;
+		int intDoors;
+		int intSpeed;
+		String strAnswer;
+		int intVowels;
+		char chrChoice;
+		char chrInitial;
 		
 		BufferedImage imgScene1 = con.loadImage("scene1.jpg");
 		con.drawImage(imgScene1,-200,-400);
-		
-		/*con.repaint();
+		/*
+		con.repaint();
 		con.println("You were once a loyal knight of the kingdom of St.Augustine, sworn to protect the king and his people.");
 		con.sleep(1300);
 		con.println("But everything changed when a dark force corrupted the king and became a tyrant.");
@@ -53,10 +60,11 @@ public class MidtermProject{
 		con.sleep(2300);
 		con.println("Your choices will determine your fate.");
 		con.sleep(330);
-		*/
+		
 		intLuck = (int)(Math.random()*10+1);
 		con.println("");
 		con.println("Your luck is "+intLuck);
+		con.println("Your health is "+intHealth);
 		con.println("What is your name");
 		strProtagonist = con.readLine();
 		int intLength = strProtagonist.length();
@@ -76,28 +84,83 @@ public class MidtermProject{
 			}
 		con.println("Choose difficulty level (1.0 - easy, 2.0 - medium, 3.0 - hard)");
 		while(true){
-		dblDifficulty = con.readInt();
-		if(dblDifficulty == 1.0){
-			intLuck = intLuck;
-			con.println("int luck stays the same "+intLuck);
-			break;
-		}else if(dblDifficulty == 2.0){
-			intLuck -= 2;
-			con.println("int luck decreases by 2 "+intLuck);
-			break;
-		}else if(dblDifficulty == 3.0){
-			intLuck -= 3;
-			con.println("int luck decreases by 3 "+intLuck);
-			break;
-		}else{
-			con.println("Invalid input, please try again with (1.0 - easy, 2.0 - medium, 3.0 - hard)");
+			dblDifficulty = con.readInt();
+			if(dblDifficulty == 1.0){
+				intLuck = intLuck;
+				con.println("int luck stays the same "+intLuck);
+				break;
+			}else if(dblDifficulty == 2.0){
+				intLuck -= 2;
+				con.println("int luck decreases by 2, your luck is now: "+intLuck);
+				break;
+			}else if(dblDifficulty == 3.0){
+				intLuck -= 3;
+				con.println("int luck decreases by 3, your luck is now: "+intLuck);
+				break;
+			}else{
+				con.println("Invalid input, please try again with (1.0 - easy, 2.0 - medium, 3.0 - hard)");
+			}
 		}
-		}
-		
-		
-		
+		con.println("Good luck");
+		con.sleep(2600);
+		*/ 
+		scene2(con);
 
 
 		
 	}
+	public static void scene2(Console con) {
+    con.clear();
+    BufferedImage imgPrison = con.loadImage("prison.jpg");
+    con.drawImage(imgPrison, 0, 0);
+    con.setTextColor(Color.RED);
+    con.println("You wake up groggily, your head throbbing from the blow that knocked you unconscious.");
+    con.sleep(300);
+    con.println("As your eyes adjust to the dim light, you realize that you are in a small cell with a heavy iron door.");
+    con.sleep(300);
+    con.println("A guard is now standing inside, keeping watch.");
+
+    int intGuard = 100;
+    int intDelta = 20;
+    int intDirection = -1;
+    int intRightBound = 300;
+
+    BufferedImage imgGuard = con.loadImage("Guard.png");
+    BufferedImage imgPrisoner = con.loadImage("Prisoner.png");
+    con.drawImage(imgPrisoner, 0, 300);
+    intGuard = intGuard + intDirection * intDelta;
+    while (true) {
+		
+        if (intGuard== 100) {
+            intDirection = intDirection * -1;
+            intRightBound = 300;
+                con.drawImage(imgGuard, intGuard, 300);
+        } else if (intGuard == intRightBound) {
+            intDirection = intDirection * -1;
+                con.drawImage(imgGuard, intGuard, 300);
+
+        }
+
+        char currentChar = con.getChar();
+        if (Character.isLowerCase(currentChar)) {
+            // Handle user input for protagonist's actions based on currentChar
+            if (currentChar == 'a') {
+                con.println("Protagonist tries to attack the guard.");
+                // Add animation for attack action
+            } else if (currentChar == 'b') {
+                con.println("Protagonist tries to bribe the guard.");
+                // Add animation for bribe action
+            } else if (currentChar == 'c') {
+                con.println("Protagonist tries to charm the guard.");
+                // Add animation for charm action
+            } else {
+                con.println("Protagonist does nothing.");
+                // Add animation for no action
+            }
+        }
+
+    }
+
+}
+
 }
