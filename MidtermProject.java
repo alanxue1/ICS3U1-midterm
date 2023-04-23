@@ -3,6 +3,8 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Font;
 public class MidtermProject{
+	static int intLuck = 0;
+	static int intHealth =100;
 	public static void main(String[] args){
 		Console con = new Console("Executioner's Labyrinth: A Perilous Escape",1280,720);
 		
@@ -20,7 +22,52 @@ public class MidtermProject{
 			//if any key is pressed, then the user will go to scene 1
 			scene1(con);
 		}
+		boolean sucess = scene2(con,intHealth,intLuck);
+		boolean scene3aResult;
+		boolean scene3bResult;
+		boolean scene4bResult;
+		boolean scene4aResult;
+		if(sucess) {
+			//depending on the result, scene3a either goes to scene4a or scene4b
+			scene3aResult = scene3a(con,intHealth,intLuck);
+			if(scene3aResult == true){
+				//success, therefore the player goes to scene4a
+				scene4a(con, intHealth,intLuck);
+			}else{
+				scene4b(con, intHealth,intLuck);
+				//unsuccessful, therefore the player goes to scene4b
+			}
+		}
+		
+		else if(scene3bResult = scene3b(con,intHealth, intLuck)){
+			if(scene3bResult == true){
+				//success, therefore the player goes to scene4a
+				scene4a(con, intHealth,intLuck);
+			}else{
+				scene4b(con, intHealth,intLuck);
+				//unsuccessful, therefore the player goes to scene4b
+			}
+			
+		}
+		else if(scene4aResult = scene4a(con,intHealth,intLuck)){
+			if(scene4aResult == true){
+				//success, therefore the player goes to scene5a
+				scene5a(con,intHealth,intLuck);
+			}else{
+				//unsuccessful, therefore the player goes to scene5b
+				scene5b(con,intHealth,intLuck);
+			}
+		}else if(scene4bResult = scene4b(con,intHealth,intLuck)){
+			if(scene4bResult == true){
+				//success, therefore the player goes to scene5a
+				scene5a(con,intHealth,intLuck);
+			}else{
+				//unsuccessful, therefore the player goes to scene5b
+				scene5b(con,intHealth,intLuck);
+			}
+		}
 	}
+
 	public static void scene1(Console con){
 		//scene 1 introduction
 		int intText = 300;
@@ -28,9 +75,7 @@ public class MidtermProject{
 		String strBack = "";
 		String strLetter = "";
 		String strProtagonist;
-		int intLuck;
 		double dblDifficulty;
-		int intHealth = 100;
 		int intDoors;
 		String strAnswer;
 		int intVowels;
@@ -137,35 +182,7 @@ public class MidtermProject{
 		con.println("Good luck");
 		con.sleep(2600);
 		
-		boolean sucess = scene2(con,intHealth,intLuck);
-		boolean scene3aResult;
-		boolean scene3bResult;
-		if(sucess) {
-			//depending on the result, scene3a either goes to scene4a or scene4b
-			scene3aResult = scene3a(con,intHealth,intLuck);
-			if(scene3aResult == true){
-				//success, therefore the player goes to scene4a
-				scene4a(con, intHealth,intLuck);
-			}else{
-				scene4b(con, intHealth,intLuck);
-				//unsuccessful, therefore the player goes to scene4b
-			}
-		}
-		
-		else{
-			//depending on the result, scene3b either goes to scene4a or scene4b
-			scene3bResult = scene3b(con,intHealth, intLuck);
-			if(scene3bResult == true){
-				//success, therefore the player goes to scene4a
-				scene4a(con, intHealth,intLuck);
-			}else{
-				scene4b(con, intHealth,intLuck);
-				//unsuccessful, therefore the player goes to scene4b
-			}
-			
-		}
-	
-		
+		return;
 
 
 		
@@ -237,14 +254,14 @@ public class MidtermProject{
             } else if (currentChar == 'b') {
 				//This checks if the player pressed the 'b' key. If this condition is true, it means the player is trying to bribe the guard.
                 con.println("You try to bribe the guard.");
-                //This checks if the player's luck value (intLuck) is greater than or equal to 5. If this condition is true, it means the player's luck is high enough to successfully bribe the guard and be set free.
+                //This checks if the player's luck value (intLuck) is greater than or equal to 6. If this condition is true, it means the player's luck is high enough to successfully bribe the guard and be set free.
                 if(intLuck>= 6){
 					con.sleep(2300);
 					con.println("The guard takes your money and sets you free");
 					con.sleep(2300);
 					return true;
 				}else if(intLuck<6){
-					//This checks if the player's luck value (intLuck) is less than 5. If this condition is true, it means the player's luck is not high enough to successfully bribe the guard.
+					//This checks if the player's luck value (intLuck) is less than 6. If this condition is true, it means the player's luck is not high enough to successfully bribe the guard.
 					con.sleep(2300);
 					con.println("The guard does not care about your insignificant bribe and brings you to the torture chamber.");
 					intHealth -= 50;
@@ -256,13 +273,13 @@ public class MidtermProject{
 				//This checks if the player pressed the 'c' key. If this condition is true, it means the player is trying to charm the guard.
 				con.println("You try to charm the guard.");
                 if(intLuck>= 7){
-					//This checks if the player's luck value (intLuck) is greater than or equal to 5. If this condition is true, it means the player's luck is high enough to successfully charm the guard.
+					//This checks if the player's luck value (intLuck) is greater than or equal to 6. If this condition is true, it means the player's luck is high enough to successfully charm the guard.
 					con.sleep(2300);
 					con.println("You charmed the guard and he sets you free");
 					con.sleep(2300);
 					return true;
 				}else if(intLuck<7){
-					//This checks if the player's luck value (intLuck) is less than 5. If this condition is true, it means the player's luck is not high enough to successfully charm the guard.
+					//This checks if the player's luck value (intLuck) is less than 6. If this condition is true, it means the player's luck is not high enough to successfully charm the guard.
 					con.sleep(2300);
 					con.println("The guard is unflattered with your charms and decides you bring you to the torture chamber.");
 					intHealth -= 50;
@@ -398,7 +415,13 @@ public static boolean scene3b(Console con,int intHealth, int intLuck){
 			con.sleep(33);
 		}
 	}
+	/*
+	con.println("You have been sent to a torture chamber");
+	con.sleep(1000);
 	con.println("What do you want to say to the interrogator");
+	con.sleep(2300);
+	*/
+	con.println("Choose your words wisely");
 	String strTorture = con.readLine();
 	String strLetter;
 	int intLength = strTorture.length();
@@ -413,38 +436,214 @@ public static boolean scene3b(Console con,int intHealth, int intLuck){
 		if(intVowel>=5){
 			//if there are more than 5 vowels in the string, the player will get sent to scene4a
 			con.println("The interrogator believes you and sets you free");
-			con.sleep(1000);
+			con.sleep(2300);
 			return true;
 		}else{
 			//if there are less than 5 vowels in the string, the player will get sent to scene4b
 			con.println("The interrogator does not believe you and now the king is waiting for your execution");
-			con.sleep(1000);
+			con.sleep(2300);
 			return false;
 		}
 	}
-public static void scene4a(Console con,int intHealth, int intLuck){
+public static boolean scene4a(Console con,int intHealth, int intLuck){
 	con.clear();
-	BufferedImage imgPrison = con.loadImage("prison.jpg");
-    con.drawImage(imgPrison, 0, 0);
-	con.println("The Courtyard");
+	con.setTextColor(Color.BLACK);
+	BufferedImage imgCourtyard = con.loadImage("scene4a.jpeg");
+    con.drawImage(imgCourtyard, 0, 0);
+    con.repaint();
+    con.println("You have reached the courtyard,there is a horse and a gate.");
+    con.sleep(1000);
+    con.println("Click on either the the horse or the gate to escape");
+    while(true){
+    if((con.currentMouseX()<526)&&(con.currentMouseX()>0)&&(con.currentMouseY()<691)&&(con.currentMouseY()>412)&&(con.currentMouseButton() == 1)){
+		//if the luck is greater or equal to 5, the player will escape and go to scene5a
+		if(intLuck>=5){
+			con.println("You ride the horse and jump over the gate.");
+			con.sleep(2300);
+			return true;
+		}else if(intLuck <5){
+			//if the luck is less than 5, the player will get executed and go to scene5b
+			con.println("The horse throws you off and you get executed on the spot.");
+			con.sleep(2300);
+			return false;
+		}
+			
+	}else if((con.currentMouseX()<1063)&&(con.currentMouseX()>600)&&(con.currentMouseY()<530)&&(con.currentMouseX()>300)&&(con.currentMouseButton() == 1)){
+		if(intLuck>=6){
+			//if the luck is greater or equal to 6, the player will escape and go to scene5a
+			con.println("You loosen the lock on the gate and run away.");
+			con.sleep(2300);
+			return true;
+		}else if(intLuck <6){
+			//if the luck is less than 6, the player will get executed and go to scene5b
+			con.println("The gate is locked and you get executed on the spot.");
+			con.sleep(2300);
+			return false;
+		}
 	}
-public static void scene4b(Console con,int intHealth, int intLuck){
+	
+	}
+}
+public static boolean scene4b(Console con,int intHealth, int intLuck){
 	con.clear();
-	BufferedImage imgPrison = con.loadImage("prison.jpg");
-    con.drawImage(imgPrison, 0, 0);
-	con.println("The Execution");
+	BufferedImage imgCastle = con.loadImage("castle.jpg");
+	BufferedImage imgCrown1 = con.loadImage("crown1.png");
+	BufferedImage imgKing = con.loadImage("king.png");
+    con.drawImage(imgCastle, -300, -300);
+    BufferedImage imgPrisoner4 = con.loadImage("prisoner4.png");
+    BufferedImage imgGuard = con.loadImage("Guard.png");
+    con.drawImage(imgCrown1, 1220, 270);
+    con.drawImage(imgKing, 1200, 300);
+    con.repaint();
+    con.sleep(33);
+    int intGuard = 0;
+    
+     while (intGuard < 1000){
+		//the code will run until the condition is not true
+        if (intGuard < 1000) {
+            intGuard +=10;
+        
+                
+        } else if (intGuard == 1000) {
+			//the guard will stop at 1100
+            intGuard += 10;
+
+        }
+        con.drawImage(imgCastle, -300, -300);
+        con.drawImage(imgGuard, intGuard, 300);
+		con.drawImage(imgPrisoner4, intGuard + 50, 300);
+		con.drawImage(imgKing, 1200, 300);
+		con.drawImage(imgCrown1, 1220, 270);
+		con.setDrawColor(Color.YELLOW);
+		con.fillOval(1180,-20,125,125);
+		con.repaint();
+		con.sleep(33);
 	}
+		con.setTextColor(Color.RED);
+		con.println("Enter'a'(attack king) or 'b'(beg for mercy) or 'c'(curse king) on your keyboard");
+		char currentChar = con.readChar();
+        if (Character.isLowerCase(currentChar)) {
+			//if a key is pressed
+            if (currentChar == 'a') {
+				//This checks if the player pressed the 'a' key. If this condition is true, it means the player is trying to attack the king.
+                con.println("You try to attack the king");
+                
+                if(intLuck>= 5){
+					//This checks if the player's luck value (intLuck) is greater than or equal to 5. If this condition is true, it means the player's luck is high enough to successfully knock out the guard and attack the king.
+					con.sleep(2300);
+					con.println("You successfully break free and attack both the king and the guard");
+					con.sleep(2300);
+					return true;
+				}else if(intLuck<5){
+					//This checks if the player's luck value (intLuck) is less than 5. If this condition is true, it means the player's luck is not high enough to successfully break free.
+					con.sleep(2300);
+					con.println("You fail to break free and the king executes you on the spot");
+					intHealth -= 50;
+					con.sleep(2300);
+					return false;
+			}
+
+            } else if (currentChar == 'b') {
+				//This checks if the player pressed the 'b' key. If this condition is true, it means the player is trying to bribe the guard.
+                con.println("You try to beg for mercy.");
+                //This checks if the player's luck value (intLuck) is greater than or equal to 6. If this condition is true, it means the player's luck is high enough to successfully beg for mercy and be set free.
+                if(intLuck>= 6){
+					con.sleep(2300);
+					con.println("The king pities you and sets you free");
+					con.sleep(2300);
+					return true;
+				}else if(intLuck<6){
+					//This checks if the player's luck value (intLuck) is less than 6. If this condition is true, it means the player's luck is not high enough to make the king pity you.
+					con.sleep(2300);
+					con.println("The king laughs at your beg for mercy and executes you on the spot");
+					intHealth -= 50;
+					con.sleep(2300);
+					return false;
+				}
+
+            } else if (currentChar == 'c') {
+				//This checks if the player pressed the 'c' key. If this condition is true, it means the player is trying to charm the guard.
+				con.println("You try to curse the king");
+                if(intLuck>= 7){
+					//This checks if the player's luck value (intLuck) is greater than or equal to 7. If this condition is true, it means the player's luck is high enough to successfully curse the king.
+					con.sleep(2300);
+					con.println("You curse the king and he dies, the guard is overwhelmed with shock and you run away.");
+					con.sleep(2300);
+					return true;
+				}else if(intLuck<7){
+					//This checks if the player's luck value (intLuck) is less than 7. If this condition is true, it means the player's luck is not high enough to successfully curse the king.
+					con.sleep(2300);
+					con.println("The curse does not seem to work, and enraged, the king executes you on the spot");
+					intHealth -= 50;
+					con.sleep(2300);
+					return false;
+				}
+            }
+        }
+        return false;
+	}
+
 public static void scene5a(Console con,int intHealth, int intLuck){
 	con.clear();
-	BufferedImage imgPrison = con.loadImage("prison.jpg");
-    con.drawImage(imgPrison, 0, 0);
-	con.println("The Freedom");
+	int intChoice;
+	BufferedImage imgForest = con.loadImage("forest.jpeg");
+    con.drawImage(imgForest, 0, -280);
+	BufferedImage imgPrisoner = con.loadImage("prisoner5.png");
+    con.drawImage(imgPrisoner, 0, 500);
+    BufferedImage imgTraveller = con.loadImage("traveller.png");
+    con.drawImage(imgTraveller, 800, 300);
+    con.repaint();
+    con.sleep(1000);
+    con.setTextColor(Color.ORANGE);
+    con.println("You have reached a forest where you meet a friendly traveller");
+    con.sleep(1000);
+    con.println("Do you want to 1(Go with the traveler), 2(Stay in the forest), or 3(Go back to the dungeon)");
+    while(true){
+			//the loop will run until one of the choices is chosen
+			intChoice = con.readInt();
+			if(intChoice == 1){
+				//if the player enters 1.0, the intLuck value remains unchanged and a message is displayed indicating the luck stays the same.
+				con.println("You go with the traveller and start a new life in another kingdom.");
+				con.sleep(1000);
+				con.setTextColor(Color.GREEN);
+				con.println("CONGRATULATIONS YOU HAVE BEAT THE GAME");
+				con.sleep(4000);
+				con.closeConsole();
+			}else if(intChoice == 2){
+				//if the player enters 2.0, the intLuck value is decreased by 2 and a message is displayed indicating the luck has decreased by 2.
+				con.println("You become a hermit and live in the forest for the rest of your life");
+				con.sleep(1000);
+				con.setTextColor(Color.GREEN);
+				con.println("CONGRATULATIONS YOU HAVE BEAT THE GAME");
+				con.sleep(4000);
+				con.closeConsole();
+			}else if(intChoice == 3){
+				//if the player enters 3.0, the intLuck value is decreased by 3 and a message is displayed indicating the luck has decreased by 3.
+				con.println("You go back to the dungeon, free other prisoners, and overthrow the evil king");
+				con.sleep(1000);
+				con.setTextColor(Color.GREEN);
+				con.println("CONGRATULATIONS YOU HAVE BEAT THE GAME");
+				con.sleep(4000);
+				con.closeConsole();
+			}else{
+				//if the player enters any other value, an error message is displayed indicating invalid input and the player is prompted to try again with the valid options (1.0, 2.0, or 3.0) for the difficulty level.
+				con.println("Invalid input, please try again with 1(Go with the traveler), 2(Stay in the forest), or 3(Go back to the dungeon)");
+			}
+		}
 	}
 public static void scene5b(Console con,int intHealth, int intLuck){
 	con.clear();
-	BufferedImage imgPrison = con.loadImage("prison.jpg");
-    con.drawImage(imgPrison, 0, 0);
-	con.println("The Death");
+	con.setDrawColor(Color.BLACK);
+	con.fillRect(0,0,1280,720);
+	BufferedImage imgPrisoner = con.loadImage("dead.png");
+    con.drawImage(imgPrisoner, 400, 300);
+	Font fntTitle = con.loadFont("blood.ttf",150);
+	con.setDrawFont(fntTitle);
+	con.setDrawColor(Color.RED);
+	con.drawString("GAME OVER",265,-100);
+    con.repaint();
+    con.sleep(4000);
+	con.closeConsole();
 	}
 }
 
