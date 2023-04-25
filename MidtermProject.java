@@ -1,3 +1,4 @@
+//Executioner's Labyrinth: A Perilous Escape, Alan Xue, Version 1.0.6
 import arc.*;
 import java.awt.image.BufferedImage;
 import java.awt.Color;
@@ -32,40 +33,51 @@ public class MidtermProject{
 			scene3aResult = scene3a(con,intHealth,intLuck);
 			if(scene3aResult == true){
 				//success, therefore the player goes to scene4a
-				scene4a(con, intHealth,intLuck);
+				scene4aResult = scene4a(con, intHealth,intLuck);
+				if(scene4aResult == true){
+				//success, therefore the player goes to scene5a
+				scene5a(con,intHealth,intLuck);
 			}else{
-				scene4b(con, intHealth,intLuck);
+				//unsuccessful, therefore the player goes to scene5b
+				scene5b(con,intHealth,intLuck);
+			}
+			}else{
+				scene4bResult = scene4b(con, intHealth,intLuck);
 				//unsuccessful, therefore the player goes to scene4b
+				if(scene4bResult == true){
+				//success, therefore the player goes to scene5a
+				scene5a(con,intHealth,intLuck);
+			}else{
+				//unsuccessful, therefore the player goes to scene5b
+				scene5b(con,intHealth,intLuck);
+			}
+			}
+		}else{
+			//depending on the result, scene3b either goes to scene4a or scene4b
+			scene3bResult= scene3b(con,intHealth,intLuck);
+			if(scene3bResult == true){
+				//success, therefore the player goes to scene4a
+				scene4aResult = scene4a(con, intHealth,intLuck);
+				if(scene4aResult == true){
+				//success, therefore the player goes to scene5a
+				scene5a(con,intHealth,intLuck);
+			}else{
+				//unsuccessful, therefore the player goes to scene5b
+				scene5b(con,intHealth,intLuck);
+			}
+			}else{
+				scene4bResult = scene4b(con, intHealth,intLuck);
+				//unsuccessful, therefore the player goes to scene4b
+				if(scene4bResult == true){
+				//success, therefore the player goes to scene5a
+				scene5a(con,intHealth,intLuck);
+			}else{
+				//unsuccessful, therefore the player goes to scene5b
+				scene5b(con,intHealth,intLuck);
+			}
 			}
 		}
 		
-		else if(scene3bResult = scene3b(con,intHealth, intLuck)){
-			if(scene3bResult == true){
-				//success, therefore the player goes to scene4a
-				scene4a(con, intHealth,intLuck);
-			}else{
-				scene4b(con, intHealth,intLuck);
-				//unsuccessful, therefore the player goes to scene4b
-			}
-			
-		}
-		else if(scene4aResult = scene4a(con,intHealth,intLuck)){
-			if(scene4aResult == true){
-				//success, therefore the player goes to scene5a
-				scene5a(con,intHealth,intLuck);
-			}else{
-				//unsuccessful, therefore the player goes to scene5b
-				scene5b(con,intHealth,intLuck);
-			}
-		}else if(scene4bResult = scene4b(con,intHealth,intLuck)){
-			if(scene4bResult == true){
-				//success, therefore the player goes to scene5a
-				scene5a(con,intHealth,intLuck);
-			}else{
-				//unsuccessful, therefore the player goes to scene5b
-				scene5b(con,intHealth,intLuck);
-			}
-		}
 	}
 
 	public static void scene1(Console con){
@@ -91,7 +103,7 @@ public class MidtermProject{
 		
 		
 				
-		/*
+		
 		con.repaint();
 		con.println("-------------------------------------------------------------------------------------------------------------------------------------");
 		con.sleep(300);
@@ -133,7 +145,7 @@ public class MidtermProject{
 		con.sleep(330);
 		con.println("-------------------------------------------------------------------------------------------------------------------------------------");
 		con.sleep(2300);
-		*/
+		
 		intLuck = (int)(Math.random()*10+1);
 		con.println("");
 		con.println("Your luck is "+intLuck);
@@ -193,14 +205,13 @@ public class MidtermProject{
     BufferedImage imgPrison = con.loadImage("prison.jpg");
     con.drawImage(imgPrison, 0, 0);
     con.setTextColor(Color.WHITE);
-    /*
+    
     con.println("You wake up groggily, your head throbbing from the blow that knocked you unconscious.");
     con.sleep(2300);
     con.println("As your eyes adjust to the dim light, you realize that you are in a small cell with a heavy iron door.");
     con.sleep(2300);
     con.println("A guard is now standing inside, keeping watch.");
     con.sleep(2000);
-    */ 
     con.println("Press either 'a'(attack guard) or 'b'(bribe guard) or 'c'(charm guard) on your keyboard");
 
     int intGuard = 300;
@@ -415,12 +426,12 @@ public static boolean scene3b(Console con,int intHealth, int intLuck){
 			con.sleep(33);
 		}
 	}
-	/*
+	
 	con.println("You have been sent to a torture chamber");
 	con.sleep(1000);
 	con.println("What do you want to say to the interrogator");
 	con.sleep(2300);
-	*/
+	
 	con.println("Choose your words wisely");
 	String strTorture = con.readLine();
 	String strLetter;
@@ -520,7 +531,7 @@ public static boolean scene4b(Console con,int intHealth, int intLuck){
 		con.sleep(33);
 	}
 		con.setTextColor(Color.RED);
-		con.println("Enter'a'(attack king) or 'b'(beg for mercy) or 'c'(curse king) on your keyboard");
+		con.println("Enter 'a'(attack king) or 'b'(beg for mercy) or 'c'(curse king) on your keyboard");
 		char currentChar = con.readChar();
         if (Character.isLowerCase(currentChar)) {
 			//if a key is pressed
@@ -598,6 +609,8 @@ public static void scene5a(Console con,int intHealth, int intLuck){
     con.println("You have reached a forest where you meet a friendly traveller");
     con.sleep(1000);
     con.println("Do you want to 1(Go with the traveler), 2(Stay in the forest), or 3(Go back to the dungeon)");
+    con.println("Enter either (1),(2),or (3)");
+    con.sleep(1000);
     while(true){
 			//the loop will run until one of the choices is chosen
 			intChoice = con.readInt();
