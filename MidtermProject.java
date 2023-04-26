@@ -155,47 +155,47 @@ public class MidtermProject{
 		strProtagonist = con.readLine();
 		int intLength = strProtagonist.length();
 		for(int intCount1 = intLength; intCount1 >= 1; intCount1 --){
-		strLetter = strProtagonist.substring(intCount1-1 , intCount1);
-		strBack = strBack + strLetter;
-		}
-		if(strProtagonist.equalsIgnoreCase(strBack)){
-			//if name is palindrome, luck increases by 1 and a hint pops up
-			intLuck += 1;
-			con.println("Lucky name, increased luck value: "+intLuck);
-			con.println("Hint: press \"a\" in the next scene");
-			}else{
-			//if name is not a palindrome, luck decreases by 1
-			intLuck -= 1;
-			con.println("Unlucky name, decreased luck value: "+intLuck);
+			strLetter = strProtagonist.substring(intCount1-1 , intCount1);
+			strBack = strBack + strLetter;
 			}
-		con.println("Choose difficulty level (1.0 - easy, 2.0 - medium, 3.0 - hard)");
-		while(true){
-			//the loop will run until one of the choices is chosen
-			dblDifficulty = con.readDouble();
-			if(dblDifficulty == 1.0){
-				//if the player enters 1.0, the intLuck value remains unchanged and a message is displayed indicating the luck stays the same.
-				intLuck = intLuck;
-				con.println("your luck stays the same "+intLuck);
-				break;
-			}else if(dblDifficulty == 2.0){
-				//if the player enters 2.0, the intLuck value is decreased by 2 and a message is displayed indicating the luck has decreased by 2.
-				intLuck -= 2;
-				con.println("your luck decreases by 2, your luck is now: "+intLuck);
-				break;
-			}else if(dblDifficulty == 3.0){
-				//if the player enters 3.0, the intLuck value is decreased by 3 and a message is displayed indicating the luck has decreased by 3.
-				intLuck -= 3;
-				con.println("your luck decreases by 3, your luck is now: "+intLuck);
-				break;
-			}else{
-				//if the player enters any other value, an error message is displayed indicating invalid input and the player is prompted to try again with the valid options (1.0, 2.0, or 3.0) for the difficulty level.
-				con.println("Invalid input, please try again with (1.0 - easy, 2.0 - medium, 3.0 - hard)");
+			if(strProtagonist.equalsIgnoreCase(strBack)){
+				//if name is palindrome, luck increases by 1 and a hint pops up
+				intLuck += 1;
+				con.println("Lucky name, increased luck value: "+intLuck);
+				con.println("Hint: press \"a\" in the next scene");
+				}else{
+				//if name is not a palindrome, luck decreases by 1
+				intLuck -= 1;
+				con.println("Unlucky name, decreased luck value: "+intLuck);
+				}
+			con.println("Choose difficulty level (1.0 - easy, 2.0 - medium, 3.0 - hard)");
+			while(true){
+				//the loop will run until one of the choices is chosen
+				dblDifficulty = con.readDouble();
+				if(dblDifficulty == 1.0){
+					//if the player enters 1.0, the intLuck value remains unchanged and a message is displayed indicating the luck stays the same.
+					intLuck = intLuck;
+					con.println("your luck stays the same "+intLuck);
+					break;
+				}else if(dblDifficulty == 2.0){
+					//if the player enters 2.0, the intLuck value is decreased by 2 and a message is displayed indicating the luck has decreased by 2.
+					intLuck -= 2;
+					con.println("your luck decreases by 2, your luck is now: "+intLuck);
+					break;
+				}else if(dblDifficulty == 3.0){
+					//if the player enters 3.0, the intLuck value is decreased by 3 and a message is displayed indicating the luck has decreased by 3.
+					intLuck -= 3;
+					con.println("your luck decreases by 3, your luck is now: "+intLuck);
+					break;
+				}else{
+					//if the player enters any other value, an error message is displayed indicating invalid input and the player is prompted to try again with the valid options (1.0, 2.0, or 3.0) for the difficulty level.
+					con.println("Invalid input, please try again with (1.0 - easy, 2.0 - medium, 3.0 - hard)");
+				}
 			}
-		}
-		con.println("Good luck");
-		con.sleep(2600);
-		
-		return;
+			con.println("Good luck");
+			con.sleep(2600);
+			
+			return;
 
 
 		
@@ -479,7 +479,7 @@ public static boolean scene4a(Console con,int intHealth, int intLuck){
     con.sleep(1000);
     con.println("Click on either the the horse or the gate to escape");
     while(true){
-    if((con.currentMouseX()<526)&&(con.currentMouseX()>0)&&(con.currentMouseY()<691)&&(con.currentMouseY()>412)&&(con.currentMouseButton() == 1)){
+		if((con.currentMouseX()<526)&&(con.currentMouseX()>0)&&(con.currentMouseY()<691)&&(con.currentMouseY()>412)&&(con.currentMouseButton() == 1)){
 		//if the luck is greater or equal to 5, the player will escape and go to scene5a
 		if(intLuck>=5){
 			con.println("You ride the horse and jump over the gate.");
@@ -568,7 +568,7 @@ public static boolean scene4b(Console con,int intHealth, int intLuck){
 					return false;
 			}
 
-            } else if (currentChar == 'b') {
+            }else if (currentChar == 'b') {
 				//This checks if the player pressed the 'b' key. If this condition is true, it means the player is trying to bribe the guard.
                 con.println("You try to beg for mercy.");
                 //This checks if the player's luck value (intLuck) is greater than or equal to 6. If this condition is true, it means the player's luck is high enough to successfully beg for mercy and be set free.
