@@ -18,6 +18,7 @@ public class MidtermProject{
 		Font fntTitleSmall = con.loadFont("Minecraft.ttf",30);
 		con.setDrawFont(fntTitleSmall);
 		con.drawString("Press Any Key to Continue",405,550);
+		con.repaint();
 		char currentChar = con.getChar();
         if (Character.isLowerCase(currentChar)) {
 			//if any key is pressed, then the user will go to scene 1
@@ -605,7 +606,7 @@ public static void scene5a(Console con,int intHealth, int intLuck){
     con.drawImage(imgTraveller, 800, 300);
     con.repaint();
     con.sleep(1000);
-    con.setTextColor(Color.ORANGE);
+    con.setTextColor(Color.RED);
     con.println("You have reached a forest where you meet a friendly traveller");
     con.sleep(1000);
     con.println("Do you want to 1(Go with the traveler), 2(Stay in the forest), or 3(Go back to the dungeon)");
