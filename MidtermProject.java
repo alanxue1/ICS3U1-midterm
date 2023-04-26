@@ -325,53 +325,63 @@ public static boolean scene3a(Console con, int intHealth, int intLuck){
 		for(int intCount= 0;intCount<intDoors;intCount++){
 			//this code will run for however many times intDoor is
 			int intItem = (int)(Math.random()*9)+1;
-			//these if statements are possible items that could be found and add or decrease the player's health
+			
 			if(intItem == 2){
+				//you find food and your health increases by 10
 				con.println("You found food");
 				intHealth += 10;
 				con.println("Your health has been increased by 10, it is now: "+intHealth);
 				con.sleep(2000);
 			}else if(intItem == 4){
+				//you find armour and your health increases by 10
 				con.println("You found armour");
 				intHealth += 10;
 				con.println("Your health has been increased by 10, it is now: "+intHealth);
 				con.sleep(2000);
 			}else if(intItem == 6){
+				//you find a potion and your health increases by 10
 				con.println("You found a potion");
 				intHealth += 10;
 				con.println("Your health has been increased by 10, it is now: "+intHealth);
 				con.sleep(2000);
 			}else if(intItem == 8){
+				//you find water and your health increases by 10
 				con.println("You found water");
 				intHealth += 10;
 				con.println("Your health has been increased by 10, it is now: "+intHealth);
 				con.sleep(2000);
 			}else if(intItem == 10){
+				//you find a bandaid and your health increases by 10
 				con.println("You found bandaid");
 				intHealth += 10;
 				con.println("Your health has been increased by 10, it is now: "+intHealth);
 				con.sleep(2000);
 			}else if(intItem == 1){
+				//you run into a snake and your health decreases by 10
 				con.println("You ran into a poisonous snake");
 				intHealth -= 10;
 				con.println("Your health has been decreased by 10, it is now: "+intHealth);
 				con.sleep(2000);
 			}else if(intItem == 3){
+				//you run into a trap and your health decreases by 10
 				con.println("You ran into a trap");
 				intHealth -= 10;
 				con.println("Your health has been decreased by 10, it is now: "+intHealth);
 				con.sleep(2000);
 			}else if(intItem == 5){
+				//you run into a witch and your health decreases by 10
 				con.println("A witch has cursed you");
 				intHealth -= 10;
 				con.println("Your health has been decreased by 10, it is now: "+intHealth);
 				con.sleep(2000);
 			}else if(intItem == 7){
+				//you trip on a rock and your health decreases by 10
 				con.println("You tripped on a rock");
 				intHealth -= 10;
 				con.println("Your health has been decreased by 10, it is now: "+intHealth);
 				con.sleep(2000);
 			}else if(intItem == 9){
+				//you get bit by a spider and your health decreases by 10
 				con.println("You got bit by a spider");
 				intHealth -= 10;
 				con.println("Your health has been decreased by 10, it is now: "+intHealth);
@@ -440,13 +450,14 @@ public static boolean scene3b(Console con,int intHealth, int intLuck){
 	int intVowel = 0;
 
 		for(int intCount = 0; intCount < intLength; intCount++){
+			//checks for vowels and adds 1 to intVowel each time there is a vowel
 			strLetter = strTorture.substring(intCount, intCount +1);
 			if(strLetter.equals("a")||strLetter.equals("e")||strLetter.equals("i")||strLetter.equals("o")||strLetter.equals("u")||strLetter.equals("y")){
 				intVowel = intVowel +1;
 			}
 		}
 		if(intVowel>=5){
-			//if there are more than 5 vowels in the string, the player will get sent to scene4a
+			//if intVowel is more than or equal to 5 the player will get sent to scene4a
 			con.println("The interrogator believes you and sets you free");
 			con.sleep(2300);
 			return true;
@@ -458,6 +469,7 @@ public static boolean scene3b(Console con,int intHealth, int intLuck){
 		}
 	}
 public static boolean scene4a(Console con,int intHealth, int intLuck){
+	//The courtyard
 	con.clear();
 	con.setTextColor(Color.BLACK);
 	BufferedImage imgCourtyard = con.loadImage("scene4a.jpeg");
@@ -497,6 +509,7 @@ public static boolean scene4a(Console con,int intHealth, int intLuck){
 	}
 }
 public static boolean scene4b(Console con,int intHealth, int intLuck){
+	//The Execution
 	con.clear();
 	BufferedImage imgCastle = con.loadImage("castle.jpg");
 	BufferedImage imgCrown1 = con.loadImage("crown1.png");
@@ -596,6 +609,7 @@ public static boolean scene4b(Console con,int intHealth, int intLuck){
 	}
 
 public static void scene5a(Console con,int intHealth, int intLuck){
+	//The freedom
 	con.clear();
 	int intChoice;
 	BufferedImage imgForest = con.loadImage("forest.jpeg");
@@ -616,7 +630,7 @@ public static void scene5a(Console con,int intHealth, int intLuck){
 			//the loop will run until one of the choices is chosen
 			intChoice = con.readInt();
 			if(intChoice == 1){
-				//if the player enters 1.0, the intLuck value remains unchanged and a message is displayed indicating the luck stays the same.
+				//if the player enters 1, a message pops up stating that You go with the traveller and start a new life in another kingdom.
 				con.println("You go with the traveller and start a new life in another kingdom.");
 				con.sleep(1000);
 				con.setTextColor(Color.GREEN);
@@ -624,7 +638,7 @@ public static void scene5a(Console con,int intHealth, int intLuck){
 				con.sleep(4000);
 				con.closeConsole();
 			}else if(intChoice == 2){
-				//if the player enters 2.0, the intLuck value is decreased by 2 and a message is displayed indicating the luck has decreased by 2.
+				//if the player enters 1, a message pops up stating that You become a hermit and live in the forest for the rest of your life
 				con.println("You become a hermit and live in the forest for the rest of your life");
 				con.sleep(1000);
 				con.setTextColor(Color.GREEN);
@@ -632,7 +646,7 @@ public static void scene5a(Console con,int intHealth, int intLuck){
 				con.sleep(4000);
 				con.closeConsole();
 			}else if(intChoice == 3){
-				//if the player enters 3.0, the intLuck value is decreased by 3 and a message is displayed indicating the luck has decreased by 3.
+				//if the player enters 1, a message pops up stating that You go back to the dungeon, free other prisoners, and overthrow the evil king
 				con.println("You go back to the dungeon, free other prisoners, and overthrow the evil king");
 				con.sleep(1000);
 				con.setTextColor(Color.GREEN);
@@ -646,6 +660,7 @@ public static void scene5a(Console con,int intHealth, int intLuck){
 		}
 	}
 public static void scene5b(Console con,int intHealth, int intLuck){
+	//The death
 	con.clear();
 	con.setDrawColor(Color.BLACK);
 	con.fillRect(0,0,1280,720);
